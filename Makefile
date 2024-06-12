@@ -1,6 +1,6 @@
 # Define variables
 IMAGE_NAME = cyrip/php
-TAG = 8.3-octane-alpine
+TAG = 8.3-cli-alpine
 
 # Default target
 .PHONY: all
