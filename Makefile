@@ -1,6 +1,6 @@
 # Define variables
 IMAGE_NAME = cyrip/php
-TAG = 8.3-cli-bullseye
+TAG = 8.3-fpm-bullseye
 
 # Default target
 .PHONY: all

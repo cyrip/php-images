@@ -1,4 +1,4 @@
-FROM php:8.3-cli-bullseye
+FROM php:8.3-fpm-bullseye
 
 RUN sed -i 's/deb\.debian\.org/ftp.de.debian.org/g' /etc/apt/sources.list
 
@@ -11,7 +11,7 @@ RUN apt-get update --fix-missing && \
 
 RUN docker-php-ext-configure bcmath && docker-php-ext-configure gd && docker-php-ext-configure pdo_mysql && docker-php-ext-configure calendar && docker-php-ext-configure zip && \
     docker-php-ext-install bcmath pdo_mysql calendar zip gd && \
-#    docker-php-ext-enable bcmath pdo_mysql calendar zip && \
+#    docker-php-ext-enable bcmath pdo_mysql calendar zip gd && \
     printf "no\nyes\nyes\nno\nyes\yes" | pecl install redis && \
     docker-php-ext-enable redis
 
@@ -23,3 +23,4 @@ RUN docker-php-ext-configure sockets && docker-php-ext-install --ini-name 01-soc
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 RUN sed -i 's/^memory_limit.*/memory_limit = 1024M/g' /usr/local/etc/php/php.ini
+COPY etc/php-fpm.d/www.conf /usr/local/etc/php/conf.d/docker-fpm.ini
