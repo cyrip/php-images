@@ -1,2 +1,7 @@
 # php-images
-PHP images
+
+## build image
+```sh
+make build
+```
+
